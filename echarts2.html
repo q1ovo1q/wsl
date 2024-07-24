@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimized ECharts Example</title>
+    <link rel="stylesheet" href="../swiper/swiper-bundle.min.css">
+    <script src="../echarts.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #main {
+            width: 80%;
+            height: 80%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main"></div>
+    <script>
+        var myChart = echarts.init(document.getElementById('main'));
+        var option = {
+            title: {
+                text: '英雄联盟',
+                left: 'center',
+                top: 'top'
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['9.50', '6.40', '5.62', '1.32', '8.25', '7.69', '9.78', '9.50', '6.40', '5.62', '1.32', '8.25', '7.69', '9.78', '9.50', '6.40', '5.62', '1.32', '8.25', '7.69', '9.78', '9.50', '6.40', '5.62', '1.32', '8.25', '7.69', '9.78', '9.50', '6.40', '5.62', '1.32', '8.25', '7.69', '9.78'],
+                axisLabel: {
+                    rotate: 45,
+                    formatter: function (value) {
+                        return value.slice(0, 5); // 截取显示的字符长度
+                    }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}'
+                }
+            },
+            series: [
+                {
+                    data: [123, 193, 190, 193, 160, 189, 180, 180, 179, 189, 167, 179, 159, 198, 169, 159,168, 182, 178, 198, 194, 168, 183, 191, 184, 174, 173, 170, 155, 166, 156, 176, 188, 156, 177, 193],
+                    type: 'line',
+                    smooth: true,
+                    itemStyle: {
+                        color: 'rgb(117, 99, 65)'
+                    },
+                    lineStyle: {
+                        color: 'rgb(117, 99, 65)'
+                    },
+                    areaStyle: {
+                        color: 'white'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            position: 'top'
+                        }
+                    }
+                }
+            ],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                }
+            }
+        };
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

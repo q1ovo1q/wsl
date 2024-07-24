@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+</head>
+
+<body>
+    <div id="main" style="width: 1200px;height:400px;"></div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script>
+        var myChart = echarts.init(document.getElementById('main'));
+        setTimeout(function () {
+            myChart.hideLoading();
+            var obama_budget_2012 = {
+                names: [
+                    '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008',
+                    '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018',
+                    '2019', '2020', '2021', '2022', '2023', '2024'
+                ],
+                budget2011List: [
+                    100, 120, 79, 50, 60, 34, 24, 67, 33, 56, 86, 15, 94, 56, 13, 84,
+                    90, 75, 65, 80, 55, 70, 45, 85, 60, 95
+                ]
+            };
+
+            var option = {
+                title: {
+                    text: '郑州：人口密度',
+                    left: 'left'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow',
+                        label: {
+                            show: true
+                        }
+                    }
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: { show: true },
+                        dataView: { show: true, readOnly: false },
+                        magicType: { show: true, type: ['line', 'bar'] },
+                        restore: { show: true },
+                        saveAsImage: { show: true }
+                    }
+                },
+                calculable: true,
+                legend: {
+                    data: ['Growth', 'Budget 2011'],
+                    itemGap: 4
+                },
+                grid: {
+                    top: '15%', // 调整以避免标题与图表重叠
+                    left: '1%',
+                    right: '10%',
+                    containLabel: true
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: obama_budget_2012.names
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        name: 'Budget (million USD)',
+                        axisLabel: {
+                            formatter: function (a) {
+                                a = +a;
+                                return isFinite(a) ? echarts.format.addCommas(+a / 1000) : '';
+                            }
+                        }
+                    }
+                ],
+                dataZoom: [
+                    {
+                        show: true,
+                        start: 0,
+                        end: 100
+                    },
+                    {
+                        type: 'inside',
+                        start: 94,
+                        end: 100
+                    },
+                    {
+                        show: true,
+                        yAxisIndex: 0,
+                        filterMode: 'empty',
+                        width: 60,
+                        height: '80%',
+                        showDataShadow: false,
+                        left: '93%'
+                    }
+                ],
+                series: [
+                    {
+                        name: 'Budget 2011',
+                        type: 'bar',
+                        data: obama_budget_2012.budget2011List,
+                        itemStyle: {
+                            color: 'rgb(149, 206, 255)'
+                        },
+                        barWidth: '40%' // 设置柱条宽度
+                    },
+                ]
+            };
+            myChart.setOption(option);
+        }, 0);
+    </script>
+</body>
+
+</html>
